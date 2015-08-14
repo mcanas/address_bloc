@@ -72,5 +72,27 @@ describe AddressBook do
       book.import_from_csv("entries.csv")
       check_entry(book.entries[4], "Sussie", "555-555-2036", "sussie@blocmail.com")
     end
+
+    it "imports the correct number of entries from a second csv" do
+      book.import_from_csv("entries_2.csv")
+      book_size = book.entries.size
+
+      expect(book_size).to eq 3
+    end
+
+    it "imports the 1st entry from a second csv" do
+      book.import_from_csv("entries_2.csv")
+      check_entry(book.entries[0], "Jake", "555-345-6789", "jake@localytics.com")
+    end
+
+    it "imports the 2nd entry from a second csv" do
+      book.import_from_csv("entries_2.csv")
+      check_entry(book.entries[1], "Miguel", "555-123-4567", "miguel@localytics.com")
+    end
+
+    it "imports the 3rd entry from a second csv" do
+      book.import_from_csv("entries_2.csv")
+      check_entry(book.entries[2], "Trey", "555-234-5678", "trey@localytics.com")
+    end
   end
 end
