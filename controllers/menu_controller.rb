@@ -14,7 +14,8 @@ class MenuController
     puts "3 - Create an entry"
     puts "4 - Search for an entry"
     puts "5 - Import entries from a CSV"
-    puts "6 - Exit"
+    puts "6 - Nuke"
+    puts "7 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -42,6 +43,10 @@ class MenuController
       read_csv
       main_menu
     when 6
+      system "clear"
+      nuke_entries
+      main_menu
+    when 7
       puts "Good-bye!"
       exit(0)
     else
@@ -148,6 +153,20 @@ class MenuController
     rescue
       puts "#{file_name} is not a valic CSV file, please enter the name of a valid CSV file"
       read_csv
+    end
+  end
+
+  def nuke_entries
+    print "Are you sure you want to delete all entries? (Y/n): "
+    confirm = gets.chomp
+
+    if confirm == "Y"
+      @address_book.clear_entries
+      puts "All entries have been nuked!"
+      main_menu
+    else
+      system "clear"
+      main_menu
     end
   end
 

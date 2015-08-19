@@ -139,4 +139,13 @@ describe AddressBook do
       check_entry(entry,  "Sussie", "555-555-2036", "sussie@blocmail.com")
     end
   end
+
+  context "#clear_entries" do
+    it "removes all existing entries" do
+      book.import_from_csv("entries.csv")
+      expect(book.entries.size).to eq 5
+      book.clear_entries
+      expect(book.entries.size).to eq 0
+    end
+  end
 end

@@ -34,6 +34,10 @@ class AddressBook
     @entries.delete_at(index)
   end
 
+  def clear_entries
+    @entries.clear
+  end
+
   def import_from_csv(file_name)
     csv_text = File.read(file_name)
     csv = CSV.parse(csv_text, headers: true, skip_blanks: true)
