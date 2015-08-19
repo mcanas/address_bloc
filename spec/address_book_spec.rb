@@ -94,5 +94,27 @@ describe AddressBook do
       book.import_from_csv("entries_2.csv")
       check_entry(book.entries[2], "Trey", "555-234-5678", "trey@localytics.com")
     end
+
+    context "#binary_search" do
+      it "searches AddressBook for a non-existent entry" do
+        book.import_from_csv("entries.csv")
+        entry = book.binary_search("Dan")
+        expect(entry).to be_nil
+      end
+
+      it "searches AddressBook for Bill" do
+        book.import_from_csv("entries.csv")
+        entry = book.binary_search("Bill")
+        expect entry.instance_of?(Entry)
+        check_entry(entry, "Bill", "555-555-4854", "bill@blocmail.com")
+      end
+
+      it "searches AddressBook for Sussie" do
+        book.import_from_csv("entries.csv")
+        entry = book.binary_search("Sussie")
+        expect entry.instance_of?(Entry)
+        check_entry(entry, "Sussie", "555-555-2036", "sussie@blocmail.com")
+      end
+    end
   end
 end
